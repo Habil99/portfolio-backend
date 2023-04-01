@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 
 class ExceptionHandlerMiddleware {
   use(err: HttpException | Error, _req: Request, res: Response) {
-    console.log(err, 'here is middleware')
+    console.log(err.message, 'here is middleware')
     if (err instanceof HttpException) {
       return res.status(err.statusCode).send({
         ...err,

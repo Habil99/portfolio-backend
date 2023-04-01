@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import bannerService from './index.service'
+import bannerService from './banner.service'
 import HttpResponse from '../../response/http-response';
 import { BannerDto } from './dto/banner.dto';
 

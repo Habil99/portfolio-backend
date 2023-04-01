@@ -1,4 +1,4 @@
-import bannerRepository from './index.repository';
+import bannerRepository from './banner.repository';
 import { CreateBannerDto } from './dto/create-banner.dto';
 import { HttpException } from '../../exceptions/http-exception';
 import { UpdateBannerDto } from './dto/update-banner.dto';
