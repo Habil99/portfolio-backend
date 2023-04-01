@@ -3,15 +3,15 @@ import { BannerEntity } from '../api/banner/entity/banner.entity';
 
 const appDataSource: DataSource = new DataSource({
   type: 'postgres',
-  host: 'localhost',
+  host: process.env.DB_HOST,
   port: 5432,
-  username: 'postgres',
-  database: 'portfolio',
+  username: process.env.DB_USER,
+  database: process.env.DB_NAME,
   entities: [BannerEntity],
   synchronize: true,
   logging: false,
   logger: 'advanced-console',
-  password: 'habil1410',
+  password: process.env.DB_PASSWORD,
 })
 
 export default appDataSource;
