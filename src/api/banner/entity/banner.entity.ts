@@ -1,8 +1,14 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import BaseEntity from '../../../db/entity/base-entity';
+import { User } from "../../user/entity/user.entity";
 
-@Entity()
-export class BannerEntity extends BaseEntity {
+@Entity({
+  name: "banners"
+})
+export class Banner extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
+
   @Column({
     type: 'varchar',
     length: 255,
@@ -26,4 +32,8 @@ export class BannerEntity extends BaseEntity {
 
   @Column()
   isActive: boolean;
+
+  // each banner has one user
+  @ManyToOne(() => User, user => user.banners)
+  user: User;
 }

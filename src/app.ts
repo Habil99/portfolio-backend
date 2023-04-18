@@ -1,12 +1,17 @@
-import 'reflect-metadata';
-require('dotenv').config();
+import "reflect-metadata";
+import express from "express";
 
-import express from 'express';
-import appDataSource from './db/data-source';
-import helmet from 'helmet';
-import appRoutes from './api/routes';
-import { HttpException } from './exceptions/http-exception';
-import HttpResponse from './response/http-response';
+require("dotenv").config();
+
+import appDataSource from "./db/data-source";
+import helmet from "helmet";
+import cors from "cors";
+import appRoutes from "./api/routes";
+import { HttpException } from "./exceptions/http-exception";
+import { QueryFailedError } from "typeorm";
+import HttpResponse from "./response/http-response";
+
+// import HttpResponse from './response/http-response';
 
 // import exceptionHandlerMiddleware from './middleware/exception-handler.middleware';
 
@@ -14,18 +19,25 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-app.use(helmet())
+app.use(helmet());
+app.use(cors({
+  origin: "*",
+}));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/api/v1', appRoutes)
+app.use("/api/v1", appRoutes);
 
 app.use((err: any, _req: any, res: any, _next: any) => {
   if (err instanceof HttpException) {
-    return res.status(err.statusCode).send(new HttpResponse(err.statusCode, err.message, err.errors));
+    return res.status(err.statusCode).send(HttpResponse.error(err.statusCode, err.message, err.errors));
   }
 
-  return res.status(500).send(new HttpResponse(500, err.message, []));
+  if (err instanceof QueryFailedError) {
+    return res.status(500).send(HttpResponse.internalError("SQL Exception", [err]));
+  }
+
+  return res.status(500).send(HttpResponse.internalError("Internal Server Error", [err]));
 });
 
 const start = async () => {
@@ -36,8 +48,8 @@ const start = async () => {
     });
   } catch (error) {
     console.log(error);
-    await appDataSource.destroy()
+    await appDataSource.destroy();
   }
-}
+};
 
 start();

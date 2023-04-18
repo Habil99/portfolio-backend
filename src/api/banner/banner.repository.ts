@@ -1,6 +1,6 @@
 import appDataSource from '../../db/data-source';
-import { BannerEntity } from './entity/banner.entity';
+import { Banner } from './entity/banner.entity';
 
-const citizenRepository = appDataSource.getRepository(BannerEntity);
+const citizenRepository = appDataSource.getRepository(Banner);
 
 export default citizenRepository;

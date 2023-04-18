@@ -3,8 +3,6 @@
 .editorconfig,6\2\626a747c8694eaae66f2afb3d1a745b045782c70
 9
 	.eslintrc,4\b\4be5f5e3cea171c304090be92469b2f2cb51039a
-=
-tsconfig.json,6\1\61ebb9fd6e8cf9082658121d5d81e297791dacd0
 P
  src/exceptions/http-exception.ts,e\1\e10ecfded5906df9b200b40fadaa51d72a0a95ee
 M
@@ -28,3 +26,36 @@ O
 src/api/auth/auth.repository.ts,e\9\e91fbde2a3b987f051c7a60726ac1b979faae413
 L
 src/db/entity/base-entity.ts,4\6\46aa5beeaf5d50b8b7b43bc9bb45d902091c69db
+:
+
+src/app.ts,2\1\216381173f187cf4c2baf119193855699f4bc616
+=
+tsconfig.json,6\1\61ebb9fd6e8cf9082658121d5d81e297791dacd0
+O
+src/api/user/user.controller.ts,8\9\89c7b9dbc686e1e06f6b6022c833d0a85a72135e
+J
+src/api/user/user.route.ts,5\1\51783b646497b29c654b4605c5780a60c3c928a1
+L
+src/types/express/index.d.ts,1\1\118b478dfece6b47e73a9ded8d20d8219a64abe8
+G
+src/api/routes/index.ts,b\c\bcc580f1340989636c64dd6f84f064c716e5e55c
+N
+src/api/auth/dto/logout.dto.ts,3\1\31a8a8059803cb47a595348a7ecdbffa26399597
+M
+src/api/auth/dto/login.dto.ts,3\d\3d012cf9dc861d6c2135c91028480baeb05cb47e
+L
+src/api/user/user.service.ts,7\9\79f85f0ec2589ffe4b4ed550717d2dd642109abd
+4
+.env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
+Q
+!src/middleware/auth.middleware.ts,e\9\e9955b33bfcc18d687e1baa299838579d61452de
+J
+src/api/auth/auth.route.ts,8\3\832b0e33d64fee713cd0845146db12f5455b7b23
+O
+src/api/auth/auth.controller.ts,d\2\d2a1f8045e123eb47d29220066e962daa1ff7fec
+L
+src/api/auth/auth.service.ts,8\8\88c92727e11939fd7d8e08adcfd94e0c47a6f826
+M
+src/services/email.service.ts,c\b\cb8125a047a25ccd752d18bdbceb6081ffe7e897
+H
+src/templates/email.html,a\0\a013494f5463c5404a7d51ddbf40791056f6c75d

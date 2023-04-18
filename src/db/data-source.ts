@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
-import { BannerEntity } from '../api/banner/entity/banner.entity';
-import { UserEntity } from '../api/user/entity/user.entity';
+import { Banner } from '../api/banner/entity/banner.entity';
+import { User } from '../api/user/entity/user.entity';
 
 const appDataSource: DataSource = new DataSource({
   type: 'postgres',
@@ -8,7 +8,7 @@ const appDataSource: DataSource = new DataSource({
   port: 5432,
   username: process.env.DB_USER,
   database: process.env.DB_NAME,
-  entities: [BannerEntity, UserEntity],
+  entities: [Banner, User],
   synchronize: true,
   logging: false,
   logger: 'advanced-console',

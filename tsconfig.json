@@ -4,7 +4,7 @@
     "target": "es2017",
     "module": "commonjs",
     "lib": [
-      "es2017",
+      "es2017"
     ],
     "strict": true,
     "noImplicitAny": true,
@@ -41,6 +41,7 @@
     "enable": true
     // enable type acquisition, so that typescript can find types for node modules
   },
+  "files": ["./src/types/express/index.d.ts"],
   "buildOptions": {
     "emitDeclarationOnly": true,
     "declaration": true,

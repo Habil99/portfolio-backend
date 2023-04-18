@@ -1,5 +1,7 @@
-import BaseEntity from '../../../db/entity/base-entity';
-import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import BaseEntity from "../../../db/entity/base-entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { Banner } from "../../banner/entity/banner.entity";
+import { About } from "../../about/entity/about.entity";
 
 /**
  * @field id
@@ -11,9 +13,11 @@ import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
  * @field password
  */
 
-@Entity()
-@Unique(['username', 'email'])
-export class UserEntity extends BaseEntity {
+@Entity({
+  name: "users",
+})
+@Unique(["username", "email"])
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -27,12 +31,19 @@ export class UserEntity extends BaseEntity {
   password: string;
 
   @Column({
-    nullable: true
+    nullable: true,
   })
   accessToken: string;
 
   @Column({
-    default: false
+    default: false,
   })
   isDeleted: boolean;
+
+  // each user has many banners
+  @OneToMany(() => Banner, banner => banner.user)
+  banners: Banner[];
+
+  @OneToMany(() => Banner, banner => banner.user)
+  about: About[];
 }

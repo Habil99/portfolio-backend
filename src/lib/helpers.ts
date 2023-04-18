@@ -15,8 +15,13 @@ export const normalizeValidatorErrors = (errors: ValidationError[]) => {
 
 export const use = (middleware: any) => (req: Request, res: Response, next: NextFunction) =>
   Promise.resolve(middleware(req, res, next)).then((response) => {
+    console.log(response);
     if (response instanceof ServerResponse) {
-      next()
+      return response;
+    }
+
+    if (response instanceof HttpResponse) {
+      return res.status(response.statusCode).send(response);
     }
 
     if (!response) {
@@ -25,5 +30,6 @@ export const use = (middleware: any) => (req: Request, res: Response, next: Next
 
     return res.status(200).send(new HttpResponse(200, 'OK', response))
   }).catch((e) => {
+    console.log(e, "error");
     next(e)
   });
