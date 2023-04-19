@@ -9,7 +9,5 @@ export class CreateAboutDto {
   @IsNotEmpty()
   skills: string[];
 
-  @IsString()
-  @IsNotEmpty()
-  photo: string;
+  photo: any;
 }

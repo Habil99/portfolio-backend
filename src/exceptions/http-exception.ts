@@ -1,3 +1,5 @@
+import { QueryFailedError } from "typeorm";
+
 export class HttpException extends Error {
   public readonly statusCode: number;
   public readonly message: string;
@@ -10,7 +12,7 @@ export class HttpException extends Error {
     this.errors = errors;
   }
 
-  private toJSON(): any {
+  public toJSON() {
     return {
       statusCode: this.statusCode,
       message: this.message,
@@ -18,19 +20,19 @@ export class HttpException extends Error {
     };
   }
 
-  public static badRequest(message: string, errors: any = null): HttpException {
+  public static badRequest(message: string, errors: any = null) {
     return new HttpException(400, message, errors).toJSON();
   }
 
-  public static unauthorized(message: string, errors: any = null): HttpException {
+  public static unauthorized(message: string, errors: any = null) {
     return new HttpException(401, message, errors).toJSON();
   }
 
-  public static forbidden(message: string, errors: any = null): HttpException {
+  public static forbidden(message: string, errors: any = null) {
     return new HttpException(403, message, errors).toJSON();
   }
 
-  public static notFound(message: string, errors: any = null): HttpException {
+  public static notFound(message: string, errors: any = null) {
     return new HttpException(404, message, errors).toJSON();
   }
 
@@ -38,11 +40,28 @@ export class HttpException extends Error {
     return new HttpException(409, message, errors).toJSON();
   }
 
-  public static tooMany(message: string, errors: any = null): HttpException {
+  public static tooMany(message: string, errors: any = null) {
     return new HttpException(429, message, errors).toJSON();
   }
 
-  public static internal(_message: string, errors: any = null): HttpException {
+  public static internal(_message: string, errors: any = null) {
     return new HttpException(500, "Internal Server Error", errors).toJSON();
+  }
+
+  private static getError(error: any): any {
+    if (error instanceof HttpException) {
+      return error.toJSON();
+    }
+
+    if (error instanceof QueryFailedError) {
+      return HttpException.internal("SQL Exception", [error]);
+    }
+
+    return HttpException.internal("Internal Server Error", [error]);
+  }
+
+  public static handle(error: any, res: any): any {
+    const { statusCode, message, errors } = HttpException.getError(error);
+    return res.status(statusCode).send({ statusCode, message, errors });
   }
 }

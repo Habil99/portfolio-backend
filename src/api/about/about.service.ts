@@ -3,6 +3,9 @@ import { UserDto } from "../user/dto/user.dto";
 import { AboutDto } from "./dto/about.dto";
 import { HttpException } from "../../exceptions/http-exception";
 import HttpResponse from "../../response/http-response";
+import { UploadedFile } from "express-fileupload";
+import cloudinaryService from "../../services/cloudinary.service";
+import { CreateAboutDto } from "./dto/create-about.dto";
 
 class AboutService {
   async findAll(user: UserDto) {
@@ -21,15 +24,21 @@ class AboutService {
     return data.map((item) => new AboutDto(item));
   }
 
-  async create(user: UserDto, about: AboutDto) {
-    const data = await aboutRepository.save({
-      ...about,
-      user: {
-        email: user.email,
-      },
-    });
+  async create(user: UserDto, about: CreateAboutDto, photo: UploadedFile) {
+    try {
+      const photoSecureURL = await cloudinaryService.upload(photo);
+      const data = await aboutRepository.save({
+        user: {
+          email: user.email,
+        },
+        ...about,
+        photo: photoSecureURL,
+      });
 
-    return new AboutDto(data);
+      return new AboutDto(data);
+    } catch (e) {
+      throw HttpException.internal("Error uploading image", e);
+    }
   }
 
   async delete(id: string) {

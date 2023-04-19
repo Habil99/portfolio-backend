@@ -7,9 +7,10 @@ import appDataSource from "./db/data-source";
 import helmet from "helmet";
 import cors from "cors";
 import appRoutes from "./api/routes";
-import { HttpException } from "./exceptions/http-exception";
 import { QueryFailedError } from "typeorm";
 import HttpResponse from "./response/http-response";
+import { isHttpException, isHttpExceptionJson } from "./lib/helpers";
+import fileUpload from "express-fileupload";
 
 // import HttpResponse from './response/http-response';
 
@@ -25,11 +26,15 @@ app.use(cors({
 }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(fileUpload({
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10 MB
+  abortOnLimit: true,
+}))
 
 app.use("/api/v1", appRoutes);
 
 app.use((err: any, _req: any, res: any, _next: any) => {
-  if (err instanceof HttpException) {
+  if (isHttpException(err) || isHttpExceptionJson(err)) {
     return res.status(err.statusCode).send(HttpResponse.error(err.statusCode, err.message, err.errors));
   }
 
@@ -37,6 +42,7 @@ app.use((err: any, _req: any, res: any, _next: any) => {
     return res.status(500).send(HttpResponse.internalError("SQL Exception", [err]));
   }
 
+  console.log(err);
   return res.status(500).send(HttpResponse.internalError("Internal Server Error", [err]));
 });
 

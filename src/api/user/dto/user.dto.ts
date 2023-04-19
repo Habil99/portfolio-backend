@@ -22,7 +22,7 @@ export class UserDto {
   ) {
     this.username = data.username;
     this.email = data.email;
-    this.password = data.password;
+    // this.password = data.password;
     this.createdAt = data.createdAt;
     this.updatedAt = data.updatedAt;
   }

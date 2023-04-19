@@ -1,5 +1,7 @@
 import aboutService from "./about.service";
 import { Request } from "express";
+import { HttpException } from "../../exceptions/http-exception";
+import { UploadedFile } from "express-fileupload";
 
 class AboutController {
   findAll(req: Request) {
@@ -7,7 +9,11 @@ class AboutController {
   }
 
   create(req: Request) {
-    return aboutService.create(req.user, req.body);
+    if (!req.files) {
+      throw HttpException.badRequest("No files were uploaded.");
+    }
+    const photo = req.files.photo as UploadedFile;
+    return aboutService.create(req.user, req.body, photo);
   }
 
   delete(req: Request) {
