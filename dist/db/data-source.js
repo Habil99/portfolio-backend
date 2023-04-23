@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
-const banner_entity_1 = require("../api/banner/entity/banner.entity");
-const user_entity_1 = require("../api/user/entity/user.entity");
-const about_entity_1 = require("../api/about/entity/about.entity");
-const social_entity_1 = require("../api/social/entity/social.entity");
+const banner_entity_1 = require("../app/banner/entity/banner.entity");
+const user_entity_1 = require("../app/user/entity/user.entity");
+const about_entity_1 = require("../app/about/entity/about.entity");
+const social_entity_1 = require("../app/social/entity/social.entity");
 const appDataSource = new typeorm_1.DataSource({
     type: "postgres",
     host: process.env.DB_HOST,

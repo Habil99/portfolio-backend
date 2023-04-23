@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import userService from "../api/user/user.service";
+import userService from "../app/user/user.service";
 import { HttpException } from "../exceptions/http-exception";
 
 class AuthMiddleware {

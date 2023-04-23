@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const user_service_1 = __importDefault(require("../api/user/user.service"));
+const user_service_1 = __importDefault(require("../app/user/user.service"));
 const http_exception_1 = require("../exceptions/http-exception");
 class AuthMiddleware {
     async verifyToken(req, res, next) {

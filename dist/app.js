@@ -9,7 +9,7 @@ require("dotenv").config();
 const data_source_1 = __importDefault(require("./db/data-source"));
 const helmet_1 = __importDefault(require("helmet"));
 const cors_1 = __importDefault(require("cors"));
-const routes_1 = __importDefault(require("./api/routes"));
+const routes_1 = __importDefault(require("./app/routes"));
 const typeorm_1 = require("typeorm");
 const http_response_1 = __importDefault(require("./response/http-response"));
 const helpers_1 = require("./lib/helpers");
