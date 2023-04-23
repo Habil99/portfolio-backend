@@ -1,8 +1,8 @@
 import { DataSource } from "typeorm";
-import { Banner } from "../api/banner/entity/banner.entity";
-import { User } from "../api/user/entity/user.entity";
-import { About } from "../api/about/entity/about.entity";
-import { Social } from "../api/social/entity/social.entity";
+import { Banner } from "../app/banner/entity/banner.entity";
+import { User } from "../app/user/entity/user.entity";
+import { About } from "../app/about/entity/about.entity";
+import { Social } from "../app/social/entity/social.entity";
 
 const appDataSource: DataSource = new DataSource({
   type: "postgres",

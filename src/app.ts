@@ -6,7 +6,7 @@ require("dotenv").config();
 import appDataSource from "./db/data-source";
 import helmet from "helmet";
 import cors from "cors";
-import appRoutes from "./api/routes";
+import appRoutes from "./app/routes";
 import { QueryFailedError } from "typeorm";
 import HttpResponse from "./response/http-response";
 import { isHttpException, isHttpExceptionJson } from "./lib/helpers";
