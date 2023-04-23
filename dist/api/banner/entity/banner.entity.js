@@ -12,19 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BannerEntity = void 0;
+exports.Banner = void 0;
 const typeorm_1 = require("typeorm");
 const base_entity_1 = __importDefault(require("../../../db/entity/base-entity"));
-let BannerEntity = class BannerEntity extends base_entity_1.default {
+const user_entity_1 = require("../../user/entity/user.entity");
+let Banner = class Banner extends base_entity_1.default {
 };
 __decorate([
-    (0, typeorm_1.Column)({
-        type: 'varchar',
-        length: 255,
-        nullable: false
-    }),
-    __metadata("design:type", String)
-], BannerEntity.prototype, "username", void 0);
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    __metadata("design:type", Number)
+], Banner.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         type: 'varchar',
@@ -32,7 +29,7 @@ __decorate([
         nullable: false
     }),
     __metadata("design:type", String)
-], BannerEntity.prototype, "title", void 0);
+], Banner.prototype, "username", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         type: 'varchar',
@@ -40,12 +37,26 @@ __decorate([
         nullable: false
     }),
     __metadata("design:type", String)
-], BannerEntity.prototype, "description", void 0);
+], Banner.prototype, "title", void 0);
+__decorate([
+    (0, typeorm_1.Column)({
+        type: 'varchar',
+        length: 255,
+        nullable: false
+    }),
+    __metadata("design:type", String)
+], Banner.prototype, "description", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Boolean)
-], BannerEntity.prototype, "isActive", void 0);
-BannerEntity = __decorate([
-    (0, typeorm_1.Entity)()
-], BannerEntity);
-exports.BannerEntity = BannerEntity;
+], Banner.prototype, "isActive", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, user => user.banners),
+    __metadata("design:type", user_entity_1.User)
+], Banner.prototype, "user", void 0);
+Banner = __decorate([
+    (0, typeorm_1.Entity)({
+        name: "banners"
+    })
+], Banner);
+exports.Banner = Banner;

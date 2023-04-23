@@ -28,9 +28,7 @@ class AboutService {
     try {
       const photoSecureURL = await cloudinaryService.upload(photo);
       const data = await aboutRepository.save({
-        user: {
-          email: user.email,
-        },
+        user: user,
         ...about,
         photo: photoSecureURL,
       });

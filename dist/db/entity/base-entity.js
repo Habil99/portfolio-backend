@@ -14,28 +14,28 @@ class BaseEntity {
 }
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)({
-        type: 'bigint'
+        type: "bigint",
     }),
     __metadata("design:type", Number)
 ], BaseEntity.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({
-        type: 'timestamp',
-        default: () => 'CURRENT_TIMESTAMP'
+    (0, typeorm_1.CreateDateColumn)({
+        type: "timestamp",
+        default: () => "CURRENT_TIMESTAMP",
     }),
     __metadata("design:type", Date)
 ], BaseEntity.prototype, "createdAt", void 0);
 __decorate([
-    (0, typeorm_1.Column)({
-        type: 'timestamp',
-        default: () => 'CURRENT_TIMESTAMP'
+    (0, typeorm_1.UpdateDateColumn)({
+        type: "timestamp",
+        default: () => "CURRENT_TIMESTAMP",
     }),
     __metadata("design:type", Date)
 ], BaseEntity.prototype, "updatedAt", void 0);
 __decorate([
-    (0, typeorm_1.Column)({
-        type: 'timestamp',
-        nullable: true
+    (0, typeorm_1.DeleteDateColumn)({
+        type: "timestamp",
+        nullable: true,
     }),
     __metadata("design:type", Date)
 ], BaseEntity.prototype, "deletedAt", void 0);

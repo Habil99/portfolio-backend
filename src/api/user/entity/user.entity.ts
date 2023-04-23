@@ -2,6 +2,7 @@ import BaseEntity from "../../../db/entity/base-entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { Banner } from "../../banner/entity/banner.entity";
 import { About } from "../../about/entity/about.entity";
+import { Social } from "../../social/entity/social.entity";
 
 /**
  * @field id
@@ -46,4 +47,7 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Banner, banner => banner.user)
   about: About[];
+
+  @OneToMany(() => Social, social => social.user)
+  social: Social[];
 }
