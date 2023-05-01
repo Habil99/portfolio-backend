@@ -1,24 +1,9 @@
-import { IsArray, IsDate, IsNotEmpty, IsString } from "class-validator";
-
 export class AboutDto {
   id: number;
-
-  @IsString()
-  @IsNotEmpty()
   description: string;
-
-  @IsArray()
-  @IsNotEmpty()
   skills: string[];
-
-  @IsString()
-  @IsNotEmpty()
   photo: string;
-
-  @IsDate()
   createdAt: Date;
-
-  @IsDate()
   updatedAt: Date;
 
   constructor(data: any) {
